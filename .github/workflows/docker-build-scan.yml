@@ -47,10 +47,8 @@ jobs:
           output: "trivy-critical.csv"
           severity: "CRITICAL,HIGH"
           vuln-type: "os,library"
-          scanners: "vuln"
+          scanner: "vuln"
           exit-code: "0"
-
-          
 
       - name: Upload CSV report
         uses: actions/upload-artifact@v4
