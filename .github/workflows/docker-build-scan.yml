@@ -42,7 +42,7 @@ jobs:
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
         with:
           image-ref: ${{ env.IMAGE_NAME }}
-          format: template
+          format: table
           template: "./csv.tpl"
           output: "trivy-critical.csv"
           severity: "CRITICAL,HIGH"
@@ -50,8 +50,8 @@ jobs:
           scanner: "vuln"
           exit-code: "0"
 
-      - name: Upload CSV report
+      - name: Upload report
         uses: actions/upload-artifact@v4
         with:
-          name: trivy-critical-report
-          path: trivy-critical.csv
+          name: trivy-report
+          path: trivy-report.txt
