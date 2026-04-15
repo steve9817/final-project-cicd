@@ -42,9 +42,9 @@ jobs:
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
         with:
           image-ref: ${{ env.IMAGE_NAME }}
-          format: table
+          format: json
           template: "./csv.tpl"
-          output: "trivy-critical.csv"
+          output: "trivy-report.json"
           severity: "CRITICAL,HIGH"
           vuln-type: "os,library"
           scanner: "vuln"
