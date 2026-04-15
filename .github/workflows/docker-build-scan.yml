@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set image name
-        run: echo "IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/vuln-python-app:latest" >> $GITHUB_ENV
+        run: echo "IMAGE_NAME=chamara98/vuln-python-app:latest" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
