@@ -43,12 +43,14 @@ jobs:
         with:
           image-ref: ${{ env.IMAGE_NAME }}
           format: template
-          template: "@./csv.tpl"
+          template: "./csv.tpl"
           output: "trivy-critical.csv"
           severity: "CRITICAL,HIGH"
           vuln-type: "os,library"
           scanners: "vuln"
           exit-code: "0"
+
+          
 
       - name: Upload CSV report
         uses: actions/upload-artifact@v4
