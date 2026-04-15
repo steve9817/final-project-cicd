@@ -50,8 +50,8 @@ jobs:
           scanner: "vuln"
           exit-code: "0"
 
-      - name: Upload report
+      - name: Upload CSV report
         uses: actions/upload-artifact@v4
         with:
-          name: trivy-report
-          path: trivy-report.txt
+          name: trivy-critical-report
+          path: trivy-critical.csv
