@@ -1,0 +1,28 @@
+# ⚠️ INTENTIONALLY VULNERABLE DEPENDENCIES - FOR TRIVY TESTING ONLY ⚠️
+
+# Flask 0.12.x — CVE-2018-1000656 (DoS via large cookie), multiple XSS issues
+Flask==0.12.2
+
+# Werkzeug 0.14.1 — CVE-2019-14806 (predictable PIN in debug mode)
+Werkzeug==0.14.1
+
+# Jinja2 2.10 — CVE-2019-10906 (sandbox escape), CVE-2019-8341
+Jinja2==2.10
+
+# PyYAML 5.3.1 — CVE-2020-14343 (arbitrary code exec via full_load / load)
+PyYAML==5.3.1
+
+# requests 2.18.4 — CVE-2018-18074 (credentials leak on redirect)
+requests==2.18.4
+
+# cryptography 2.3 — CVE-2018-10903, multiple padding oracle issues
+cryptography==2.3
+
+# urllib3 1.24.1 — CVE-2019-11324 (certificate verification bypass)
+urllib3==1.22
+
+# SQLAlchemy 1.2.0 — various SQL injection helper issues
+SQLAlchemy==1.2.0
+
+# paramiko 2.4.1 — CVE-2018-7750 (authentication bypass)
+paramiko==2.4.1

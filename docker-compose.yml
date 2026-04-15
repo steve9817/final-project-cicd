@@ -1,0 +1,61 @@
+version: "3.8"
+
+# ⚠️  INTENTIONALLY VULNERABLE — FOR TRIVY / SECURITY TESTING ONLY ⚠️
+
+services:
+  vuln-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vuln-python-app:latest
+    container_name: vuln-python-app
+
+    # ❌ Misconfig: privileged mode (Trivy HIGH finding)
+    privileged: true
+
+    # ❌ Misconfig: hardcoded secrets in environment
+    environment:
+      - SECRET_KEY=super_secret_hardcoded_key_12345
+      - DB_PASSWORD=admin123
+      - AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+      - AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+
+    ports:
+      - "5000:5000"
+
+    # ❌ Misconfig: writable root filesystem
+    read_only: false
+
+    # ❌ Misconfig: mounting sensitive host paths
+    volumes:
+      - /tmp:/host_tmp          # exposes host /tmp
+      - ./app:/app/app          # live-reload (acceptable in dev, bad in prod)
+
+
+    # ❌ Misconfig: no restart policy hardening
+    restart: unless-stopped
+
+    # ❌ Misconfig: extra Linux capabilities added
+    cap_add:
+      - NET_ADMIN
+      - SYS_PTRACE
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/debug"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Intentionally old Redis image with known CVEs ──────────────────────
+  redis:
+    image: redis:5.0.6          # CVE-2021-32625, CVE-2022-0543, etc.
+    container_name: vuln-redis
+    ports:
+      - "6379:6379"             # ❌ Misconfig: Redis exposed without auth
+    # No requirepass / ACL configured → unauthenticated access
+
+networks:
+  default:
+    driver: bridge
