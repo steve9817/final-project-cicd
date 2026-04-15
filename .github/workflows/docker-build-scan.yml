@@ -39,7 +39,7 @@ jobs:
           tags: ${{ env.IMAGE_NAME }}
 
       - name: Run Trivy and create CSV report
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
         with:
           image-ref: ${{ env.IMAGE_NAME }}
           format: template
