@@ -28,7 +28,7 @@ COPY requirements.txt .
 # RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install -r requirements.txt
 
-# ── Copy application source ────────────────────────────────────────────────
+# ── Copy application source code────────────────────────────────────────────────
 COPY app/ ./app/
 
 # ── Create data directory for path-traversal demo ─────────────────────────
